@@ -60,5 +60,5 @@ const getTree = (later = [], mid = []) => {
 const later = [4, 8, 5, 2, 9, 6, 10, 7, 3, 1];
 const mid = [4, 2, 5, 8, 1, 9, 6, 3, 7, 10];
 
-const node = getTree(later, mid);
-console.log(node);
+const tree = getTree(later, mid);
+console.log(tree);
