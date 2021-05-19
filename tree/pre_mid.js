@@ -61,8 +61,59 @@ const getTree = (pre = [], mid = []) => {
   }
 }
 
+const getTraversalTree = (nodes = [], type = '', result = []) => {
+
+  const node = nodes[nodes.length - 1];
+  switch (type) {
+    case 'pre': {
+      result.push(node.value);
+      if (node.leftNode) {
+        nodes.push(node.leftNode);
+        getTraversalTree(nodes, type, result);
+      }
+      if (node.rightNode) {
+        nodes.push(node.rightNode);
+        getTraversalTree(nodes, type, result);
+      }
+      break;
+    }
+    case 'mid': {
+      if (node.leftNode) {
+        nodes.push(node.leftNode);
+        getTraversalTree(nodes, type, result);
+      }
+      result.push(node.value);
+      if (node.rightNode) {
+        nodes.push(node.rightNode);
+        getTraversalTree(nodes, type, result);
+      }
+      break;
+    }
+    case 'later': {
+      if (node.leftNode) {
+        nodes.push(node.leftNode);
+        getTraversalTree(nodes, type, result);
+      }
+      if (node.rightNode) {
+        nodes.push(node.rightNode);
+        getTraversalTree(nodes, type, result);
+      }
+      result.push(node.value);
+      break;
+    }
+  }
+
+  nodes.pop();
+
+  if (!nodes.length) {
+    return result;
+  }
+}
+
 const pre = [1, 2, 4, 5, 8, 3, 6, 9, 7, 10];
 const mid = [4, 2, 5, 8, 1, 9, 6, 3, 7, 10];
 
 const tree = getTree(pre, mid);
 console.log(tree);
+
+console.log(getTraversalTree([tree], 'later', []))
